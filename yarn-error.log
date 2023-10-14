@@ -1,0 +1,27 @@
+Arguments: 
+  /Users/davetech/.nvm/versions/node/v16.16.0/bin/node /usr/local/bin/yarn add aws-cdk-lib
+
+PATH: 
+  /Users/davetech/.nvm/versions/node/v16.16.0/bin:/Users/davetech/.rbenv/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/davetech/.nvm/versions/node/v16.16.0/bin:/Users/davetech/.rbenv/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Users/davetech/.cargo/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.16.0
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:71:26)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
