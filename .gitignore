@@ -2,3 +2,4 @@
 node_modules
 yarn.lock
 cdk-out
+yarn-error.log
