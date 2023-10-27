@@ -2,19 +2,16 @@
   "name": "pully",
   "version": "1.0.0",
   "description": "Realtime messaging infrastructure",
-  "main": "lib/index.ts",
+  "main": "lib/index.js",
   "author": "David Ajayi",
   "license": "ISC",
   "scripts": {
-    "build:cdk": "esbuild ./lib/index.ts --minify --platform=node --outdir=dist/cdk",
     "cdk:bootstrap": "cdk bootstrap --context @aws-cdk/core:newStyleStackSynthesis=1 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess",
-    "cdk:synth": "npm run build:cdk && mkdir ./lib/cdk-out && npm run cdk:bootstrap && cdk synth",
-    "cdk:deploy": "npm run build:cdk && npm run cdk:bootstrap && cdk deploy '*' --outputs-file cdk_outputs.json",
+    "cdk:synth": "mkdir ./lib/cdk-out && npm run cdk:bootstrap && cdk synth",
+    "cdk:deploy": "npm run cdk:bootstrap && cdk deploy '*' --outputs-file cdk_outputs.json",
     "cdk:destroy": "cdk destroy"
   },
   "dependencies": {
-    "@types/node": "^20.8.6",
-    "aws-cdk-lib": "^2.101.0",
-    "constructs": "^10.3.0"
+    "aws-cdk-lib": "^2.101.0"
   }
 }

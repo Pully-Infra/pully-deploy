@@ -1,6 +1,6 @@
 {
-    "app": "~/.pully/deploy/lib/index.ts",
-    "output": "./lib/cdk-out",
+    "app": "~/.pully/deploy/lib/index.js",
+    "output": "~/.pully/deploy/lib/cdk-out",
     "context": {
         "@aws-cdk/core:newStyleStackSynthesis": false
     }
