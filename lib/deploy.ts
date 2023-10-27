@@ -1,5 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
+import ElastiCache from "./elastiCache";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
@@ -7,26 +8,29 @@ import * as iam from "aws-cdk-lib/aws-iam";
 import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
 
 interface ISharedProps {
-  s3: cdk.aws_s3.Bucket;
+  redis: ElastiCache;
   vpc: cdk.aws_ec2.Vpc;
+  s3: cdk.aws_s3.Bucket;
   cluster: cdk.aws_ecs.Cluster;
 }
 
-// const bucketNameString = CONFIG.BUCKET_NAME;
-const bucketNameString = "pully-lambda-role";
+const port = 3008;
 const vpcName = "PullyVpc";
-const containerName = "PullyContainer";
-const serviceName = "PullyService";
+const cacheName = "PullyRedis";
 const bucketName = "PullyBucket";
+const serviceName = "PullyService";
 const clusterName = "PullyCluster";
-const taskDefinitionName = "PullyTaskDefinition";
+const containerName = "PullyContainer";
 const lambdaRoleName = "pully-lambda-role";
-const lambdaExecutionRoleName = "PullyLambdaExecutionRole";
+const bucketNameString = "pully-general-bucket";
+const taskDefinitionName = "PullyTaskDefinition";
 const dockerImageName = "davetech123/pully-server";
+const lambdaExecutionRoleName = "PullyLambdaExecutionRole";
 
 export class SharedResources extends cdk.Stack {
-  public s3: cdk.aws_s3.Bucket;
+  public redis: ElastiCache;
   public vpc: cdk.aws_ec2.Vpc;
+  public s3: cdk.aws_s3.Bucket;
   public cluster: cdk.aws_ecs.Cluster;
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -47,6 +51,11 @@ export class SharedResources extends cdk.Stack {
     // Create the ecs cluster which manages a pool of resources where we can deploy and manage our containerized application.
     // The resources are provided by the vpc
     this.cluster = new ecs.Cluster(this, clusterName, {
+      vpc: this.vpc,
+    });
+
+    // Create the redis cluster
+    this.redis = new ElastiCache(this, cacheName, {
       vpc: this.vpc,
     });
   }
@@ -70,12 +79,17 @@ export class PullyServer extends cdk.Stack {
     taskDefinition.addContainer(containerName, {
       image: ecs.ContainerImage.fromRegistry(dockerImageName),
       memoryLimitMiB: 512,
-      environment: {},
+      environment: {
+        REDIS_URL: props.redis.cluster.attrRedisEndpointAddress,
+        AWS_BUCKET_NAME: props.s3.bucketName,
+        REGION: "us-east-1",
+        PORT: `${port}`,
+      },
       cpu: 256,
       portMappings: [
         {
           protocol: ecs.Protocol.TCP, // Use TCP protocol for communication.
-          containerPort: 80, // Application inside the container should listen on port 80.
+          containerPort: port, // Application inside the container should listen on port 80.
           hostPort: 80, // The port on the fargate service should listen on port 80 and forward traffic to the container's port.
         },
       ],
@@ -130,6 +144,10 @@ export class PullyServer extends cdk.Stack {
         ),
         iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess"),
       ],
+    });
+
+    new cdk.CfnOutput(this, "BucketName", {
+      value: props?.s3.bucketName as string,
     });
 
     new cdk.CfnOutput(this, "BucketARN", {
