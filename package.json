@@ -6,7 +6,7 @@
   "author": "David Ajayi",
   "license": "ISC",
   "scripts": {
-    "build:cdk": "esbuild ./lib/index.ts --bundle --platform=node --outdir=dist/cdk",
+    "build:cdk": "esbuild ./lib/index.ts --minify --platform=node --outdir=dist/cdk",
     "cdk:bootstrap": "cdk bootstrap --context @aws-cdk/core:newStyleStackSynthesis=1 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess",
     "cdk:synth": "npm run build:cdk && mkdir ./lib/cdk-out && npm run cdk:bootstrap && cdk synth",
     "cdk:deploy": "npm run build:cdk && npm run cdk:bootstrap && cdk deploy '*' --outputs-file cdk_outputs.json",

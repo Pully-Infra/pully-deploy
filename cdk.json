@@ -1,5 +1,5 @@
 {
-    "app": "./dist/index.js",
+    "app": "./dist/lib/index.js",
     "output": "./lib/cdk-out",
     "context": {
         "@aws-cdk/core:newStyleStackSynthesis": false

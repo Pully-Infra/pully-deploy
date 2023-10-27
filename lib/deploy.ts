@@ -146,6 +146,8 @@ export class PullyServer extends cdk.Stack {
       ],
     });
 
+    const loadBalancerDnsName = service.loadBalancer.loadBalancerDnsName;
+
     new cdk.CfnOutput(this, "BucketName", {
       value: props?.s3.bucketName as string,
     });
@@ -156,6 +158,10 @@ export class PullyServer extends cdk.Stack {
 
     new cdk.CfnOutput(this, "Lambda Role Arn", {
       value: lambdaRole.roleArn,
+    });
+
+    new cdk.CfnOutput(this, "Server URL", {
+      value: loadBalancerDnsName,
     });
   }
 }
