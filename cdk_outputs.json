@@ -1,0 +1,31 @@
+{
+  "SharedResourcesStack": {
+    "ExportsOutputRefPullyVpcPrivateSubnet1Subnet953563E3A543D30C": "subnet-0950b69f4c7e5a30d",
+    "ExportsOutputRefPullyBucketED850619BB4A1804": "pully-general-bucket",
+    "ExportsOutputRefPullyVpcPrivateSubnet2Subnet745F488272CDE6BB": "subnet-0d78e610bec55fe92",
+    "ExportsOutputFnGetAttPullyBucketED850619ArnD5F06001": "arn:aws:s3:::pully-general-bucket",
+    "ExportsOutputRefPullyVpcPublicSubnet2Subnet73F1C1E6FE05003A": "subnet-08bdb4869e54b6ab0",
+    "ExportsOutputRefPullyVpcPublicSubnet1Subnet3BB8D073250E54DD": "subnet-0af571adb08ac671f",
+    "ExportsOutputRefPullyVpcEBC47C9723D0E3FF": "vpc-094f37c6ffbc35bb3",
+    "ExportsOutputRefPullyCluster1058FF1DD040831E": "SharedResourcesStack-PullyCluster1058FF1D-Q9GO6nvCGG3g"
+  },
+  "SharedResourcesStackPullyRedis2B039E3D": {
+    "ExportsOutputFnGetAttPullyRedisClusterRedisEndpointAddress02974C16": "sha-pu-l5d8ws04attn.czdm6u.0001.use1.cache.amazonaws.com",
+    "ExportsOutputFnGetAttPullyRedisClusterRedisEndpointPortF0EBAF54": "6379",
+    "RedisURL": "sha-pu-l5d8ws04attn.czdm6u.0001.use1.cache.amazonaws.com",
+    "RedisPort": "6379"
+  },
+  "PullyServerStack": {
+    "BucketARN": "arn:aws:s3:::pully-general-bucket",
+    "ServerURL": "PullyS-Pully-pEjkwjKWHKJV-391050399.us-east-1.elb.amazonaws.com",
+    "BucketName": "pully-general-bucket",
+    "RedisURL": "sha-pu-l5d8ws04attn.czdm6u.0001.use1.cache.amazonaws.com",
+    "AppID": "pvqxu-clsyq",
+    "RedisPort": "6379",
+    "LambdaRoleName": "pully-lambda-role",
+    "LambdaRoleArn": "arn:aws:iam::796325119405:role/pully-lambda-role",
+    "PullyServiceLoadBalancerDNSD9E9E6BB": "PullyS-Pully-pEjkwjKWHKJV-391050399.us-east-1.elb.amazonaws.com",
+    "JWTSecret": "7ba172c6-04ef-4763-bb1c-5008c4e72bd1",
+    "PullyServiceServiceURL680DE6F9": "http://PullyS-Pully-pEjkwjKWHKJV-391050399.us-east-1.elb.amazonaws.com"
+  }
+}

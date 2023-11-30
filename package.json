@@ -6,12 +6,15 @@
   "author": "David Ajayi",
   "license": "ISC",
   "scripts": {
-    "cdk:bootstrap": "cdk bootstrap --context @aws-cdk/core:newStyleStackSynthesis=1 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess",
-    "cdk:synth": "mkdir ./lib/cdk-out && npm run cdk:bootstrap && cdk synth",
-    "cdk:deploy": "npm run cdk:bootstrap && cdk deploy '*' --outputs-file cdk_outputs.json",
-    "cdk:destroy": "cdk destroy"
+    "cdk:deploy": "cdk bootstrap && cdk deploy --all --outputs-file cdk_outputs.json",
+    "cdk:destroy": "cdk destroy --all",
+    "build": "node lib/index.js"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.101.0"
+    "@aws-cdk/aws-secretsmanager": "^1.204.0",
+    "@aws-sdk/client-sts": "^3.438.0",
+    "@aws-sdk/credential-provider-ini": "^3.438.0",
+    "aws-cdk-lib": "^2.101.0",
+    "constructs": "^10.3.0"
   }
 }
